@@ -5,14 +5,18 @@
 class Tree {
 public:
 	Tree() : root(new Node(0)) {}
+	Tree(int value) : root(new Node(value)) {}
 	Tree(pNode newRoot) : root(newRoot) {}
 
 	int getMax() const;
 	int getMin() const;
 
-	bool traversePreOrder();
-	bool traverseInOrder();
-	bool traversePostOrder();
+	int getMax(pNode node) const;
+	int getMin(pNode node) const;
+
+	void traversePreOrder();
+	void traverseInOrder();
+	void traversePostOrder();
 
 	bool insert(int value);
 	bool contains(int value);
@@ -24,4 +28,11 @@ private:
 	bool insertHelper(pNode node, int value);
 	bool containsHelper(pNode node, int value);
 	int removeHelper(pNode node, int value);
+
+	void preOrderHelper(pNode node);
+	void inOrderHelper(pNode node);
+	void postOrderHelper(pNode node);
+
+
+	pNode sharedPointerHelper(Node* n);
 };

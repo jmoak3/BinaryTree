@@ -14,6 +14,8 @@ public:
 
 	bool setLeft(pNode newLeft) { left = newLeft; return true; }
 	bool setRight(pNode newRight) { right = newRight; return true; }
+	bool setValue(int newValue) { value = newValue; return true; }
+
 private:
 	int value;
 	pNode left;
