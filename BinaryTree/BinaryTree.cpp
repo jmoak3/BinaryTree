@@ -30,13 +30,44 @@ int main()
 	std::cout << tree.getMax() << std::endl;
 
 	std::cout << "removing 5. In order: 1 3 4 7 8 " << std::endl;
-	tree.remove(5);
+	if (tree.contains(5)) tree.remove(5);
 	tree.traverseInOrder();
 	std::cout << std::endl;
 
 	std::cout << "Preorder 7 4 1 3 8 " << std::endl;
 	tree.traversePreOrder();
 	std::cout << std::endl;
+
+	std::cout << "Removing 1. Preorder 7 4 3 8 " << std::endl;
+	if (tree.contains(1)) tree.remove(1);
+	tree.traversePreOrder();
+	std::cout << std::endl;
+
+	std::cout << "In order 3 4 7 8 " << std::endl;
+	tree.traverseInOrder();
+	std::cout << std::endl;
+
+	std::cout << "Postorder 3 4 8 7 " << std::endl;
+	tree.traversePostOrder();
+	std::cout << std::endl;
+
+	std::cout << "Preorder 7 4 3 8 " << std::endl;
+	tree.traversePreOrder();
+	std::cout << std::endl;
+
+	std::cout << "Adding 5. Postorder 3 5 4 8 7 " << std::endl;
+	tree.insert(5);
+	tree.traversePostOrder();
+	std::cout << std::endl;
+
+	std::cout << "Preorder 7 4 3 5 8" << std::endl;
+	tree.traversePreOrder();
+	std::cout << std::endl;
+
+	std::cout << "inorder 3 4 5 7 8 " << std::endl;
+	tree.traverseInOrder();
+	std::cout << std::endl;
+
 
 	std::cin.get();
     return 0;

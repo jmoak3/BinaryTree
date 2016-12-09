@@ -39,7 +39,7 @@ bool Tree::containsHelper(pNode node, int value)
 {
 	if (node == nullptr) return false;
 	if (node->getValue() == value) return true;
-	else if (node->getValue() < value) return containsHelper(node->getLeft(), value);
+	else if (node->getValue() > value) return containsHelper(node->getLeft(), value);
 	else return containsHelper(node->getRight(), value);
 }
 bool Tree::contains(int value)
@@ -50,7 +50,11 @@ bool Tree::contains(int value)
 
 int Tree::removeHelper(pNode node, int value)
 {
-	if (node == nullptr) return -1;
+	if (node == nullptr)
+	{
+		std::cout << "Node not found!" << std::endl;
+		return -1;
+	}
 	else if (node->getValue() > value && node->getLeft() != nullptr)
 	{
 		pNode leftNode = node->getLeft();
@@ -103,7 +107,11 @@ int Tree::removeHelper(pNode node, int value)
 			return removeHelper(rightNode, value);
 		}
 	}
-	else return -1;
+	else
+	{
+		std::cout << "Node not found!" << std::endl;
+		return -1;
+	}
 }
 int Tree::remove(int value)
 {
@@ -188,8 +196,8 @@ void Tree::traverseInOrder()
 void Tree::postOrderHelper(pNode node)
 {
 	if (node == nullptr) return;
-	inOrderHelper(node->getLeft());
-	inOrderHelper(node->getRight());
+	postOrderHelper(node->getLeft());
+	postOrderHelper(node->getRight());
 	std::cout << node->getValue() << " ";
 }
 void Tree::traversePostOrder()
