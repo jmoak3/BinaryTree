@@ -8,6 +8,8 @@ public:
 	Node(int value, pNode newLeft, pNode newRight) : value(value), left(newLeft), right(newRight) {}
 	~Node() {}
 
+	bool hasLeft() { return left != nullptr; }
+	bool hasRight() { return right != nullptr; }
 	pNode getLeft() const { return left; }
 	pNode getRight() const { return right; }
 	int getValue() const { return value; }

@@ -9,14 +9,14 @@ bool Tree::insertHelper(pNode node, int value)
 {
 	if (node->getValue() > value)
 	{
-		if (node->getLeft() != nullptr)
+		if (node->hasLeft())
 			return insertHelper(node->getLeft(), value);
 		else
 			return node->setLeft(sharedPointerHelper(new Node(value)));
 	}
 	else
 	{
-		if (node->getRight() != nullptr)
+		if (node->hasRight())
 			return insertHelper(node->getRight(), value);
 		else
 			return node->setRight(sharedPointerHelper(new Node(value)));
@@ -60,12 +60,12 @@ int Tree::removeHelper(pNode node, int value)
 		pNode leftNode = node->getLeft();
 		if (leftNode->getValue() == value)
 		{
-			if (leftNode->getRight() != nullptr)
+			if (leftNode->hasRight())
 			{
 				node->setLeft(leftNode->getRight());
 				return value;
 			}
-			else if (leftNode->getLeft() != nullptr)
+			else if (leftNode->hasLeft())
 			{
 				node->setLeft(leftNode->getLeft());
 				return value;
@@ -81,17 +81,17 @@ int Tree::removeHelper(pNode node, int value)
 			return removeHelper(leftNode, value);
 		}
 	}
-	else if (node->getRight() != nullptr)
+	else if (node->hasRight())
 	{
 		pNode rightNode = node->getRight();
 		if (rightNode->getValue() == value)
 		{
-			if (rightNode->getRight() != nullptr)
+			if (rightNode->hasRight())
 			{
 				node->setRight(rightNode->getRight());
 				return value;
 			}
-			else if (rightNode->getLeft() != nullptr)
+			else if (rightNode->hasLeft())
 			{
 				node->setRight(rightNode->getLeft());
 				return value;
@@ -115,16 +115,16 @@ int Tree::removeHelper(pNode node, int value)
 }
 int Tree::remove(int value)
 {
-	//Make remove not suck later
+	if (root == nullptr) return INT_MIN;
 	if (root->getValue() == value)
 	{
-		if (root->getRight() != nullptr)
+		if (root->hasRight())
 		{
 			int newValue = remove(getMin(root->getRight()));
 			root->setValue(newValue);
 			return value;
 		}
-		else if (root->getLeft() != nullptr)
+		else if (root->hasLeft())
 		{
 			int newValue = remove(getMax(root->getLeft()));
 			root->setValue(newValue);
@@ -142,6 +142,7 @@ int Tree::remove(int value)
 int Tree::getMax() const
 {
 	pNode temp = root;
+	if (temp == nullptr) return INT_MIN;
 	//Get most right guy
 	while (temp->getRight()) temp = temp->getRight();
 	return temp->getValue();
@@ -150,6 +151,7 @@ int Tree::getMax() const
 int Tree::getMin() const
 {
 	pNode temp = root;
+	if (temp == nullptr) return INT_MIN;
 	//Get most left guy
 	while (temp->getLeft()) temp = temp->getLeft();
 	return temp->getValue();
@@ -178,6 +180,7 @@ void Tree::preOrderHelper(pNode node)
 }
 void Tree::traversePreOrder()
 {
+	std::cout << "PreOrder: ";
 	return preOrderHelper(root);
 }
 
@@ -190,6 +193,7 @@ void Tree::inOrderHelper(pNode node)
 }
 void Tree::traverseInOrder()
 {
+	std::cout << "InOrder: ";
 	return inOrderHelper(root);
 }
 
@@ -202,5 +206,6 @@ void Tree::postOrderHelper(pNode node)
 }
 void Tree::traversePostOrder()
 {
+	std::cout << "PostOrder: ";
 	return postOrderHelper(root);
 }
